@@ -1,3 +1,5 @@
+// Old skool shadebobs effect from Future Crew's Unreal
+// Very compressed but would love to get it down to 2-tweets size
 c=Math.cos,s=Math.sin,l=a=0,z=0.06;
 with(document.body.children[0].getContext('2d')){
 	globalCompositeOperation='lighter';
