@@ -2,9 +2,7 @@
 // Uses WebGL fragment shaders to compute pixel values
 // Ugly code hacked to get < 1k (1kJS)
 // 
-// Wrap in a function closure that we'll strip out after minification
-(function(){
-// Declare all the vars used below so closure will allow them to be renamed (strip out later)
+// Declare all the vars used below so uglify will allow them to be renamed (strip out by hand later)
 var prop,canvas,gl,shader,z,ab,vpa,timeUniform,vertices,vs,w,h,t,p,shaders,s;
 
 // Add two letter aliases to all gl functions to save chars
@@ -75,6 +73,3 @@ setInterval(function() {
     gl.vA(vpa, 3, gl.FLOAT, false, 0, 0); //vertexAttribPointer
     gl.dr(gl.TRIANGLE_STRIP, 0, 4);     //drawArrays
 }, 20);
-
-// Strip:
-}());
