@@ -15,6 +15,14 @@ Having a little fun with JavaScript in spirit of the js1k (www.js1k.com) competi
 
 **Size:** 311 bytes
 
+## Rotozoom
+
+ > Rotozoom and lens refraction effect from Future Crew's Second Reality
+
+I've done very little to no optimization or shrinking. It would be much much faster to do this with WebGL shaders.
+
+**Size:** 1023 bytes
+
 
 ### Build
 (To run UglifyJS2 on the src)
