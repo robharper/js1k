@@ -27,11 +27,20 @@ module.exports = function(grunt) {
           dest: 'build'
         }]
       }
+    },
+    connect: {
+      server: {
+        options: {
+          port: 9000,
+          base: 'src'
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task(s).
   grunt.registerTask('default', ['uglify', 'copy']);
