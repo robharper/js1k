@@ -1,19 +1,19 @@
 // Throw-back to Future Crew's Second Reality "Oscillating Cirles + Plasma"
 // Uses WebGL fragment shaders to compute pixel values
 // Ugly code hacked to get < 1k (1kJS)
-// 
+//
 // Declare all the vars used below so uglify will allow them to be renamed (strip out by hand later)
 var prop,canvas,gl,shader,z,ab,vpa,timeUniform,vertices,vs,w,h,t,p,shaders,s;
 
 // Add two letter aliases to all gl functions to save chars
 for(prop in gl = (canvas = document.body.children[0]).getContext("experimental-webgl"))
-  gl[prop[0]+(prop[6]||'')]=gl[prop];
+  gl[prop[0]+(prop[6]||'')+(prop[8]||'')]=gl[prop];
 
 // Set the canvas size (800 px)
 s=canvas.width=canvas.height=800;
 
 t=0;
-p = gl.cP(); //createProgram 
+p = gl.cPo(); //createProgram
 
 // Create definitions for the shader programs (vertex + fragment)
 shaders = [
@@ -30,23 +30,23 @@ vec2 c=vec2(0.1*sin(distance(p, vec2(0.1,0.3))*i+t*3.1), 0.1*sin((p.x+p.y)*i));\
 float h=mod(float(int(mod(distance(q,p+c)*20.0,2.0))+2*int(mod(distance(-q,p+c)*20.0,2.0))),3.0)/2.0; \
 gl_FragColor=vec4(h,h,h,1.0);\
 }",
-        t:gl.FN     // FRAGMENT_SHADER
+        t:gl.FN_     // FRAGMENT_SHADER
     }];
 
 // Create vertex and fragment shaders
 for( shader in shaders) {
-    vs = gl.cS(shaders[shader].t);      //createShader
-    gl.sS(vs,shaders[shader].c);        //shaderSource
-    gl.ce(vs);                          //compileShader
-    gl.aS(p,vs);                        //attachShader
+    vs = gl.cSa(shaders[shader].t);      //createShader
+    gl.sSu(vs,shaders[shader].c);        //shaderSource
+    gl.ceh(vs);                          //compileShader
+    gl.aSa(p,vs);                        //attachShader
 }
 
 // activating the program
-gl.lo(p);          //linkProgram
-gl.ug(p);           //useProgram
+gl.lor(p);          //linkProgram
+gl.uga(p);           //useProgram
 
 // Get reference to uniform
-timeUniform = gl.gf( p, "t" ); //getUniformLocation
+timeUniform = gl.gfr( p, "t" ); //getUniformLocation
 vertices = [
      1,  1,  z=-.7,
     -1,  1,  z,
@@ -54,12 +54,12 @@ vertices = [
     -1, -1,  z
     ];
 // Get reference to position attribute in vertex shader
-vpa = gl.gr(p, "l");                    //getAttribLocation
+vpa = gl.grb(p, "l");                    //getAttribLocation
 
 // Create triangle strip defn
-gl.eV(vpa);                             //enableVertexAttribArray
-gl.bf(ab=gl.ARRAY_BUFFER, gl.cB());     //bindBuffer, createBuffer
-gl.bD(ab, new Float32Array(vertices), gl.STATIC_DRAW);  //bufferData
+gl.eVr(vpa);                             //enableVertexAttribArray
+gl.bfe(ab=gl.ARRAY_BUFFER, gl.cBf());     //bindBuffer, createBuffer
+gl.bDt(ab, new Float32Array(vertices), gl.STATIC_DRAW);  //bufferData
 
 // Animation function
 setInterval(function() {
@@ -70,6 +70,6 @@ setInterval(function() {
     gl.vr(0, 0, s, s);                  //viewport
 
     // Draw
-    gl.vA(vpa, 3, gl.FLOAT, false, 0, 0); //vertexAttribPointer
-    gl.dr(gl.TRIANGLE_STRIP, 0, 4);     //drawArrays
+    gl.vAt(vpa, 3, gl.FLOAT, false, 0, 0); //vertexAttribPointer
+    gl.dry(gl.TRIANGLE_STRIP, 0, 4);     //drawArrays
 }, 20);
