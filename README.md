@@ -32,6 +32,8 @@ This may cheat a bit because it uses an image but the rest of the effect is enti
 
  > Throw-back to Future Crew's Second Reality "Oscillating Cirles + Plasma". Uses WebGL fragment shaders to compute pixel values
  
+<img width="797" alt="image" src="https://user-images.githubusercontent.com/900789/233708529-c9415c33-f605-4e88-a948-8127fd062d78.png">
+ 
 **Size:** 956 bytes
 
 
