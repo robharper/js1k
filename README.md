@@ -31,13 +31,22 @@ This may cheat a bit because it uses an image but the rest of the effect is enti
 ## Hypno
 
  > Throw-back to Future Crew's Second Reality "Oscillating Cirles + Plasma". Uses WebGL fragment shaders to compute pixel values
- 
+
 http://www.robharper.ca/js1k/hypno.html
 
 <img width="797" alt="image" src="https://user-images.githubusercontent.com/900789/233708529-c9415c33-f605-4e88-a948-8127fd062d78.png">
 
 **Size:** 1019 bytes
 
+# Not 1k
+Sometimes it's fun to just play with effects and not try to squeeze them down. So:
+## Time Warp
+
+> Colorful warp effect inspired by http://roy.red/posts/slitscan/
+
+http://www.robharper.ca/js1k/tunnel.html
+
+**Size:** Whatever
 
 ### Build
 (To run UglifyJS2 on the src)
