@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tunnel</title>
+  <style>
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
+  <script id="vertex-shader" type="x-shader/x-vertex">
+    attribute vec3 a_pos;
+    uniform float u_scale;
+    void main() {
+      gl_Position = vec4(a_pos.xy * u_scale, 0.0, 1.0);
+    }
+  </script>
+
+  <script id="fragment-shader" type="x-shader/x-fragment">
+    #ifdef GL_ES
+      precision highp float;
+    #endif
+    // Gaussian pulse width - makes stars streakier
+    #define PULSE 0.0002
+    // Density/number of stars (inverse of star angular width)
+    #define DENSITY 80.0
+    // Speed of effect
+    #define SPEED 0.8
+    // Base color of stars
+    #define COLOR vec3(0.7, 0.6, 0.5)
+
+    uniform float u_scale;
+    uniform vec2 u_offset;
+    uniform float u_time;
+
+    // Gaussian curve
+    float impulse (in float x) {
+      float ofs = x - 0.5;
+      return exp(-1.0 * ofs*ofs/PULSE);
+    }
+
+    // Cheap sin-fraction based random
+    float random (in float x) {
+      return fract(sin(x)*1e4);
+    }
+
+    void main(void) {
+      // Move center around over time
+      vec2 center = vec2(0.5, 0.5) + vec2(
+        cos(u_time * .31) + sin(u_time * .69),
+        cos(u_time * .57) + sin(u_time * .27)) * 0.1;
+      // Normalize to ~ [-0.5, 0.5]
+      vec2 position = gl_FragCoord.xy / u_scale - u_offset - center;
+      // Find polar angle of current coord, quantized to DENSITY
+      float trueAngle = atan(position.x, position.y);
+      float angle = floor(trueAngle * DENSITY + 0.5) / DENSITY;
+      float angleDeviation = angle - trueAngle;
+      // Find the sqrt of the polar radius
+      float radius = sqrt(length(position));
+
+      // Random offset
+      float rnd = random(angle);
+      // Ranom particle speed in [0.7, 1.7]
+      float rndSpeed = random(angle * 2.1) + 0.7;
+      // Random repeats period in [1.0, 11.0]
+      float rndPeriod = random(angle * 1.7)*8.0 + 1.0;
+      // Random period of pulse wave, higher means more delay before the next pulse (higher also slows particles)
+      float repeatFreq = random(angle * 3.7) * 0.5 + 1.25;
+
+      // Scale the current time by the speed and loop period for this angle
+      float t = u_time * rndSpeed / rndPeriod;
+
+      // Calculate this pixel's current position along the impuse function
+      // Time marches the pixel through the function, fract wraps at 1.0
+      // Radius in the input to the function, pulse heigh is the output (usually zero)
+      float starFuncIn = rnd + (radius * repeatFreq) - (t * SPEED);
+      float intensity = fract(starFuncIn);
+      float iteration = floor(starFuncIn);
+      // Pass into the pulse function, round the edges further from the central angle
+      float outputColor = impulse(intensity) * cos(angleDeviation*5.0*DENSITY);
+      // Get brighter as they get closer + a degree of randomness
+      // Random brightness determined by iteration through full loop
+      // Scale by repeat period so slower stars are dimmer
+      outputColor = outputColor * radius * (random(iteration)+1.) * 2.0 / rndPeriod;
+
+      // Randomly vary color a bit
+      vec3 color = COLOR + vec3(cos(rnd*3.14) * 0.2, sin(rnd*6.28) * 0.2, cos(rnd) * 0.3);
+      // Convert intensity to a color
+      gl_FragColor = vec4(outputColor * color, 1.0);
+    }
+  </script>
+</head>
+<body>
+  <canvas id="background"></canvas>
+  <script>
+    const SCALE_FACTOR = 1.0;
+  </script>
+  <script src="./js/generic-webgl.js"></script>
+</body>
+</html>

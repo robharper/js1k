@@ -1,6 +1,6 @@
 window.addEventListener('load', run, false);
 
-const scaleFactor = 2;
+const scaleFactor = SCALE_FACTOR ?? 2;
 
 // Adapted from MDN
 function buildShaderProgram(shaderInfo) {
