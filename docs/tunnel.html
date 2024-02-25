@@ -15,6 +15,10 @@
       width: 100%;
       height: 100%;
     }
+
+    code {
+      display: none;
+    }
   </style>
 
   <script id="vertex-shader" type="x-shader/x-vertex">
@@ -107,7 +111,7 @@
 </head>
 <body>
   <canvas id="background"></canvas>
-  
+
     <script>
       window.addEventListener("load",g,!1);const e=2;function t(e){const t=gl.createProgram();return e.forEach((e=>{const g=document.getElementById(e.id).firstChild.nodeValue,a=gl.createShader(e.type);gl.shaderSource(a,g),gl.compileShader(a),gl.getShaderParameter(a,gl.COMPILE_STATUS),a&&gl.attachShader(t,a)})),gl.linkProgram(t),gl.getProgramParameter(t,gl.LINK_STATUS),t}function g(){glCanvas=document.querySelector("canvas"),gl=glCanvas.getContext("webgl");const g=t([{type:gl.VERTEX_SHADER,id:"v-s"},{type:gl.FRAGMENT_SHADER,id:"f-s"}]);gl.useProgram(g),gl.getUniformLocation(g,"u_scalingFactor");const a=gl.getUniformLocation(g,"u_scale"),l=gl.getUniformLocation(g,"u_offset"),r=gl.getUniformLocation(g,"u_time"),n=new Float32Array([1,1,0,-1,1,0,1,-1,0,-1,-1,0]),o=n.length/3,i=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,i),gl.bufferData(gl.ARRAY_BUFFER,n,gl.STATIC_DRAW);const c=gl.getAttribLocation(g,"a_pos");gl.enableVertexAttribArray(c),function t(){const[g,n]=[glCanvas.clientWidth/e,glCanvas.clientHeight/e];let i,s;glCanvas.width===g&&glCanvas.height===n||(glCanvas.width=g,glCanvas.height=n),g>n?(i=n,s=[(g/n-1)/2,0]):(i=g,s=[(n/g-1)/2,0]),gl.uniform1f(a,i),gl.uniform2fv(l,s),gl.uniform1f(r,performance.now()/1e3),gl.viewport(0,0,g,n),gl.vertexAttribPointer(c,3,gl.FLOAT,!1,0,0),gl.drawArrays(gl.TRIANGLE_STRIP,0,o),requestAnimationFrame(t)}()}
     </script>
