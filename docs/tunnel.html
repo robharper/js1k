@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tunnel</title>
+  <style>
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
+  <script id="vertex-shader" type="x-shader/x-vertex">
+    attribute vec3 a_pos;
+    uniform float u_scale;
+    void main() {
+      gl_Position = vec4(a_pos.xy * u_scale, 0.0, 1.0);
+    }
+  </script>
+
+  <script id="fragment-shader" type="x-shader/x-fragment">
+    #ifdef GL_ES
+      precision highp float;
+    #endif
+    #define STRENGTH -0.15
+    #define PERIOD    4.0
+    #define DENSITY   4.0
+    #define PI        3.1415
+
+    uniform float u_scale;
+    uniform vec2 u_offset;
+    uniform float u_time;
+
+    // The MIT License
+    // https://www.youtube.com/c/InigoQuilez
+    // https://iquilezles.org/
+    // Copyright © 2014 Inigo Quilez
+    // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    vec3 hash3( vec2 p ) {
+      vec3 q = vec3( dot(p,vec2(127.1,311.7)),
+              dot(p,vec2(269.5,183.3)),
+              dot(p,vec2(419.2,371.9)) );
+      return fract(sin(q)*43758.5453);
+    }
+
+    float voronoise( in vec2 p, float u, float v ) {
+      float k = 1.0+63.0*pow(1.0-v,6.0);
+
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+
+      vec2 a = vec2(0.0,0.0);
+      for( int y=-2; y<=2; y++ )
+        for( int x=-2; x<=2; x++ ) {
+          vec2  g = vec2( x, y );
+          vec3  o = hash3( i + g )*vec3(u,u,1.0);
+          vec2  d = g - f + o.xy;
+          float w = pow( 1.0-smoothstep(0.0,1.414,length(d)), k );
+          a += vec2(o.z*w,w);
+        }
+
+      return a.x/a.y;
+    }
+
+    vec3 hsv2rgb(vec3 c) {
+      vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+      vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+      return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+    }
+
+    // RGB color with hue slowly scrolling though spectrum
+    vec3 color(float hue) {
+      return hsv2rgb(vec3(hue, 0.5, 0.5));
+    }
+
+    // Adapted from http://roy.red/posts/slitscan/
+    void main() {
+      // Convert to [-0.5, 0.5], maintain aspect ratio
+      vec2 xy = gl_FragCoord.xy / u_scale - u_offset - vec2(0.5);
+
+      // Calculate position of the circular cut through the noise function
+      float rInv = 1./length(xy);
+      // Pan the size of the circular cut between 0.2 -> 0 -> 0.2 with time
+      vec2 direction = STRENGTH * abs(vec2(cos(u_time/PERIOD), 0));
+      // Move the cut through the noise function with time
+      vec2 offset = rInv * direction - u_time;
+      vec2 uv = xy * rInv + offset;
+
+      // Calculate the noise value, the center dark spot, and distance-based brightness
+      vec3 noise = vec3(voronoise(DENSITY * uv, 1.0, 1.0));
+      float center = smoothstep(0.02, 0.18, length(xy));
+      float bright = rInv/3.0;
+      // ... and the color
+      float angle = atan(xy.y, xy.x) / PI - u_time / 5.0;
+      vec3 c = color(angle);
+
+      gl_FragColor = vec4(center * c * bright * noise, 1.0);
+    }
+  </script>
+</head>
+<body>
+  <canvas id="background"></canvas>
+  
+    <script>
+      window.addEventListener("load",g,!1);const e=2;function t(e){const t=gl.createProgram();return e.forEach((e=>{const g=document.getElementById(e.id).firstChild.nodeValue,a=gl.createShader(e.type);gl.shaderSource(a,g),gl.compileShader(a),gl.getShaderParameter(a,gl.COMPILE_STATUS),a&&gl.attachShader(t,a)})),gl.linkProgram(t),gl.getProgramParameter(t,gl.LINK_STATUS),t}function g(){glCanvas=document.querySelector("canvas"),gl=glCanvas.getContext("webgl");const g=t([{type:gl.VERTEX_SHADER,id:"v-s"},{type:gl.FRAGMENT_SHADER,id:"f-s"}]);gl.useProgram(g),gl.getUniformLocation(g,"u_scalingFactor");const a=gl.getUniformLocation(g,"u_scale"),l=gl.getUniformLocation(g,"u_offset"),r=gl.getUniformLocation(g,"u_time"),n=new Float32Array([1,1,0,-1,1,0,1,-1,0,-1,-1,0]),o=n.length/3,i=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,i),gl.bufferData(gl.ARRAY_BUFFER,n,gl.STATIC_DRAW);const c=gl.getAttribLocation(g,"a_pos");gl.enableVertexAttribArray(c),function t(){const[g,n]=[glCanvas.clientWidth/e,glCanvas.clientHeight/e];let i,s;glCanvas.width===g&&glCanvas.height===n||(glCanvas.width=g,glCanvas.height=n),g>n?(i=n,s=[(g/n-1)/2,0]):(i=g,s=[(n/g-1)/2,0]),gl.uniform1f(a,i),gl.uniform2fv(l,s),gl.uniform1f(r,performance.now()/1e3),gl.viewport(0,0,g,n),gl.vertexAttribPointer(c,3,gl.FLOAT,!1,0,0),gl.drawArrays(gl.TRIANGLE_STRIP,0,o),requestAnimationFrame(t)}()}
+    </script>
+    <code>
+      window.addEventListener("load",g,!1);const e=2;function t(e){const t=gl.createProgram();return e.forEach((e=>{const g=document.getElementById(e.id).firstChild.nodeValue,a=gl.createShader(e.type);gl.shaderSource(a,g),gl.compileShader(a),gl.getShaderParameter(a,gl.COMPILE_STATUS),a&&gl.attachShader(t,a)})),gl.linkProgram(t),gl.getProgramParameter(t,gl.LINK_STATUS),t}function g(){glCanvas=document.querySelector("canvas"),gl=glCanvas.getContext("webgl");const g=t([{type:gl.VERTEX_SHADER,id:"v-s"},{type:gl.FRAGMENT_SHADER,id:"f-s"}]);gl.useProgram(g),gl.getUniformLocation(g,"u_scalingFactor");const a=gl.getUniformLocation(g,"u_scale"),l=gl.getUniformLocation(g,"u_offset"),r=gl.getUniformLocation(g,"u_time"),n=new Float32Array([1,1,0,-1,1,0,1,-1,0,-1,-1,0]),o=n.length/3,i=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,i),gl.bufferData(gl.ARRAY_BUFFER,n,gl.STATIC_DRAW);const c=gl.getAttribLocation(g,"a_pos");gl.enableVertexAttribArray(c),function t(){const[g,n]=[glCanvas.clientWidth/e,glCanvas.clientHeight/e];let i,s;glCanvas.width===g&&glCanvas.height===n||(glCanvas.width=g,glCanvas.height=n),g>n?(i=n,s=[(g/n-1)/2,0]):(i=g,s=[(n/g-1)/2,0]),gl.uniform1f(a,i),gl.uniform2fv(l,s),gl.uniform1f(r,performance.now()/1e3),gl.viewport(0,0,g,n),gl.vertexAttribPointer(c,3,gl.FLOAT,!1,0,0),gl.drawArrays(gl.TRIANGLE_STRIP,0,o),requestAnimationFrame(t)}()}
+    </code>
+</body>
+</html>
