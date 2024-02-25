@@ -50,12 +50,34 @@ http://www.robharper.ca/js1k/tunnel.html
 
 **Size:** Whatever
 
-# Build
-(To run UglifyJS2 on the src)
+# Development
 ```
 npm install
-grunt
+
+# Build first-pass minified js
+npm run build-min
+
+# ...edit files in build/min by hand
+
+# Second minification pass + inlining in HTML, copying to /docs
+npm run build-dist
 ```
 
-### Notes
-Built files can be further hand minified.
+Hand edits include:
+- Removing `var` definitions
+
+## RegPack
+The [RegPack](https://github.com/Siorki/RegPack) compressor can be applied to the JS by enabling via flag
+in `scripts/dist.js`. It can significantly shrink JS but makes it nearly unreadable.
+
+## Running
+To run the uncrushed code, run:
+```
+npm run serve
+```
+
+After building, serve the crushed and inlined can be run via:
+```
+npm run serve-dist
+```
+

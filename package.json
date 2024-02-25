@@ -2,6 +2,12 @@
   "name": "js1k",
   "version": "0.0.0",
   "description": "js1k ====",
+  "scripts": {
+    "serve": "alive-server ./src",
+    "serve-dist": "alive-server ./docs",
+    "build-min": "node scripts/minify.js",
+    "build-dist": "node scripts/dist.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/robharper/js1k.git"
@@ -9,9 +15,11 @@
   "author": "robharper",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-uglify": "~0.2.2",
-    "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-connect": "~0.3.0"
+    "@node-minify/core": "8.0.6",
+    "@node-minify/terser": "8.0.6",
+    "glob": "10.3.10",
+    "alive-server": "1.3.0",
+    "minify": "11.0.1",
+    "regpack": "5.0.1"
   }
 }
