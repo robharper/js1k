@@ -23,12 +23,12 @@ img.onload = function(){
   var shininess = 4;
 
   var start = now();
-  
+
   // Setup
 
   var canvas = document.body.children[0];
   canvas.style.width = '640px';
-  
+
   var ctx = canvas.getContext('2d');
   ctx.drawImage(img,0,0);
   var imageData = ctx.getImageData(0, 0, img.width, img.height).data;
@@ -41,7 +41,7 @@ img.onload = function(){
     bufferData[i] = 255;
   }
 
-  var t, x, y, scale, lx, ly, lz, u, v, highlight, src, dest;
+  var t, x, y, scale, lx, ly, lz, u, v, highlight, src, dest, temp;
 
   // Render
   var draw = function() {
@@ -54,7 +54,7 @@ img.onload = function(){
     // Reflect lens motion at screen edges
     lensX = Math.abs(((lensVX*t) % (2*lensRegionWidth)) - lensRegionWidth) + lensSize;
     lensY = Math.abs(((lensVY*t) % (2*lensRegionHeight)) - lensRegionHeight) + lensSize;
-    
+
     dest = 0;
     for (y=0; y<height; y++) {
       // Do y-calcs for lens once per line
@@ -71,7 +71,7 @@ img.onload = function(){
           lz = M.sqrt(lz);
           // Calculate u,v sphere map
           u = (2*M.atan2(lx, lz)/PI) * lensSize + lensX;
-          v = lensV; 
+          v = lensV;
           // Calculate lighting effect
           highlight = M.pow((lx*lightX + ly*lightY + lz*lightZ),shininess)*lightIntensity;
         } else {

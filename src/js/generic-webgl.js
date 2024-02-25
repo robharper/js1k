@@ -1,6 +1,6 @@
 window.addEventListener('load', run, false);
 
-const scaleFactor = SCALE_FACTOR ?? 2;
+const scaleFactor = 2;
 
 // Adapted from MDN
 function buildShaderProgram(shaderInfo) {
@@ -30,17 +30,17 @@ function buildShaderProgram(shaderInfo) {
 }
 
 function run() {
-  glCanvas = document.getElementById('background');
+  glCanvas = document.getElementById('c');
   gl = glCanvas.getContext('webgl');
 
   const shaderSet = [
     {
       type: gl.VERTEX_SHADER,
-      id: 'vertex-shader',
+      id: 'v-s',
     },
     {
       type: gl.FRAGMENT_SHADER,
-      id: 'fragment-shader',
+      id: 'f-s',
     },
   ];
 
