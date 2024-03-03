@@ -9,9 +9,6 @@ var C = Math.cos;
 var percent, period, progress, cx, cy, theta, r, xp, yp, distance, rot, color, seeThrough, size;
 
 draw = t => {
-  // Control tunnel walls dissolve by time
-  // seeThrough = (1 - S(t/2)**14 + 0.1);
-
   // Clear the canvas
   c.width |=0 ;
 
@@ -64,23 +61,21 @@ draw = t => {
     );
 
     // Draw tracks
+    trackSpace = size/2/seeThrough
     x.fillStyle = `hsl(9,10%,${(1-percent)*60}%`;
-    x.fillRect(
-      cx + size/2/seeThrough,
-      cy + r*.6,
-      .8/percent, 8
-    )
-    x.fillRect(
-      cx - size/2/seeThrough,
-      cy + r*.6,
-      .8/percent, 8
-    )
-    if (((progress*50) | 0) % 10 == 0) {
+    for (track=2; track--;) {
+      x.fillRect(
+        cx + (track ? -1 : 1)*trackSpace,
+        cy + r*.6,
+        .8/percent, 8
+      )
+    }
+    if (((progress*80) | 0) % 10 == 0) {
       x.fillStyle = "#533";
       x.fillRect(
-        cx - size/2/seeThrough,
+        cx - trackSpace,
         cy + r*.6,
-        size/seeThrough, 8
+        trackSpace*2, 8
       )
     }
   }
