@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Joy</title>
+    <style >
+      body {
+        background-color: #000;
+        color: #fff;
+      }
+      canvas {
+        width: 960px;
+        height: 540px;
+      }
+      code {
+        display: block;
+        margin-top: 2rem;
+        max-width: 640px;
+        word-break: break-all;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id=c width=960 height=540></canvas>
+    
+    <script>
+      r=c.getContext("2d"),f=Math.sin,h=Math.cos,T=l=>{for(c.width|=0,r.lineWidth=3,r.strokeStyle="#fff",o=0;o<(s=70);o++,r.fill(r.lineTo(s+e,i+t,r.lineTo(s,i+t,r.stroke()))))for(i=6*o+(t=50),r.moveTo(s+(e=300),i,r.beginPath()),n=0,a=99;a--;)r.lineTo(s+e*a/99,i-Math.exp(-1*((a-t)/21)**2)*(n+=h(a*a*(o+l/1e3)+1)*f(l/8+(o+1)+a)*3))},(l=()=>{requestAnimationFrame(l),T(new Date/1e3)})();
+    </script>
+    <code>
+      r=c.getContext("2d"),f=Math.sin,h=Math.cos,T=l=>{for(c.width|=0,r.lineWidth=3,r.strokeStyle="#fff",o=0;o<(s=70);o++,r.fill(r.lineTo(s+e,i+t,r.lineTo(s,i+t,r.stroke()))))for(i=6*o+(t=50),r.moveTo(s+(e=300),i,r.beginPath()),n=0,a=99;a--;)r.lineTo(s+e*a/99,i-Math.exp(-1*((a-t)/21)**2)*(n+=h(a*a*(o+l/1e3)+1)*f(l/8+(o+1)+a)*3))},(l=()=>{requestAnimationFrame(l),T(new Date/1e3)})();
+    </code>
+    <code>
+      379 bytes
+    </code>
+  </body>
+</html>
