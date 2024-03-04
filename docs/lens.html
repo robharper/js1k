@@ -6,12 +6,12 @@
     <style >
       body {
         background-color: #000;
+        color: #fff;
       }
       code {
         display: block;
         margin-top: 2rem;
         max-width: 640px;
-        color: #fff;
         word-break: break-all;
       }
     </style>
@@ -25,6 +25,9 @@
     </script>
     <code>
       var a=new Image;a.onload=function(){var t=Math,o=t.sin,e=t.cos,n=t.PI,r=requestAnimationFrame,s=Date.now,i=320,f=240,d=160,g=120,m=50,c=s(),h=document.body.children[0];h.style.width="640px";var l=h.getContext("2d");l.drawImage(a,0,0);for(var w,I,O,R,u,v,b,p,D,M,q,x,y,V=l.getImageData(0,0,a.width,a.height).data,A=l.createImageData(i,f),C=A.data,F=3;F<A.data.length;F+=4)C[F]=255;var P=function(){for(w=s()-c,R=1.5/(8*Math.abs(e(w/5e3+n/2))+.25),rot=w/1500,d=Math.abs(.07*w%440-220)+m,g=Math.abs(.04*w%280-140)+m,x=0,O=0;O<f;O++)for(v=(O-g)/m,lensV=2*t.asin(v)/n*m+g,I=0;I<i;I++){for((b=1-(u=(I-d)/m)*u-v*v)>0?(b=t.sqrt(b),p=2*t.atan2(u,b)/n*m+d,D=lensV,M=150*t.pow(-.5*u+-.5*v+.7071*b,4)):(p=I,D=O,M=0),cosOfRot=e(rot),sinOfRot=o(rot),D-=120,y=(p-=160)*cosOfRot-D*sinOfRot,D=D*cosOfRot+p*sinOfRot,(p=(160+((p=y)/R>>0))%i)<0&&(p+=i),(D=(120+(D/R>>0))%f)<0&&(D+=f),q=4*(D*i+p),y=0;y<3;y++)C[x++]=V[q++]+M;x++}l.putImageData(A,0,0),r(P)};r(P)},a.src="img/meanman.png";
+    </code>
+    <code>
+      966 bytes
     </code>
   </body>
 </html>

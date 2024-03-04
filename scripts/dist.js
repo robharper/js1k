@@ -53,6 +53,10 @@ const go = async () => {
 
     const jsMatch = html.match(/<script src="js\/(.+)"><\/script>/i);
 
+    if(!jsMatch) {
+      console.error('No js match found in', input);
+      return;
+    }
     const jsContents = fs.readFileSync(`${outDirJS}/${jsMatch[1]}`, 'utf8');
     html = html.replace(jsMatch[0], `
     <script>
@@ -60,6 +64,9 @@ const go = async () => {
     </script>
     <code>
       ${jsContents}
+    </code>
+    <code>
+      ${jsContents.length} bytes
     </code>`);
 
     const output = input.replace(inDirStatics, outDir);
