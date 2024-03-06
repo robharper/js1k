@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dwitter: Plasma</title>
+    <style >
+      body {
+        background-color: #000;
+        color: #fff;
+      }
+      canvas {
+        width: 100%;
+      }
+      .container {
+        width: 100%;
+        max-width: 960px;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+      }
+      code {
+        display: block;
+        margin-top: 2rem;
+        max-width: 640px;
+        word-break: break-all;
+      }
+      p {
+        color: #888;
+      }
+      a {
+        color: #a00;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <canvas id=c></canvas>
+    </div>
+    <script src="js/plasma.js"></script>
+    <script src="lib/dwitter.js"></script>
+  </body>
+</html>

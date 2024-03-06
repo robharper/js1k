@@ -22,6 +22,7 @@ const go = async () => {
   // Ensure directories exists
   ensureDir(outDir);
   ensureDir(`${outDir}/img`);
+  ensureDir(`${outDir}/lib`);
   ensureDir(outDirJS);
 
   // Crush each js file
@@ -58,16 +59,24 @@ const go = async () => {
       return;
     }
     const jsContents = fs.readFileSync(`${outDirJS}/${jsMatch[1]}`, 'utf8');
+    let jsToDisplay = jsContents;
+    let disclaimer = '';
+    if (jsContents.startsWith('draw=')) {
+      // Remove draw function from the top of the file
+      jsToDisplay = jsContents.slice(9,jsContents.length-2);
+      disclaimer = '<p>* uses <a href="https://www.dwitter.net/">Dwitter</a> code golf minimal host environment</p>';
+    }
     html = html.replace(jsMatch[0], `
     <script>
       ${jsContents}
     </script>
     <code>
-      ${jsContents}
+      ${jsToDisplay}
     </code>
     <code>
-      ${jsContents.length} bytes
-    </code>`);
+      ${jsToDisplay.length} bytes
+    </code>
+    ${disclaimer}`);
 
     const output = input.replace(inDirStatics, outDir);
     fs.writeFileSync(output, html);
@@ -76,6 +85,12 @@ const go = async () => {
   // Copy images
   const imgfiles = await glob(`${inDirStatics}/img/*`);
   imgfiles.forEach(input => {
+    const output = input.replace(inDirStatics, outDir);
+    fs.copyFileSync(input, output);
+  });
+  // Copy lib files (e.g. dwitter framework)
+  const libfiles = await glob(`${inDirStatics}/lib/*`);
+  libfiles.forEach(input => {
     const output = input.replace(inDirStatics, outDir);
     fs.copyFileSync(input, output);
   });
