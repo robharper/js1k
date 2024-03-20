@@ -24,16 +24,16 @@
   <body>
     <canvas id=c width=960 height=540></canvas>
     <script src="lib/dwitter.js"></script>
-    
+
     <script>
-      w=60,m=999,y=12,M=c.getContext("2d"),R=Math.sin,$=Math.cos,draw=g=>{for(c.width|=0,i=m;i--;){for(t=i/m+.02,l=R((e=t*(a=m/y/w)+g)+$(e/3))**3*280+480,r=$(e/3)**3*150+270,o=i+60*g*y,f=30/t,k=$(o)*f,S=R(o)*f,h=1e3*t+2,p=.2*$(g/.7),l=l*$(p)+h*R(p),n=R(o)*$(3*e),M.fillStyle=`hsl(${50*n},80%,${(30*n+30)*(1-t**4)}%`,s=1-R(e/2)**14+.1,d=12/t*s,M.fillRect(k+l,S+r,d,d),trackSpace=d/2/s,M.fillStyle=`hsl(9,10%,${60*(1-t)}%`,track=2;track--;)M.fillRect(l+(track?-1:1)*trackSpace,r+.6*f,.8/t,8);(80*e|0)%10==0&&(M.fillStyle="#533",M.fillRect(l-trackSpace,r+.6*f,2*trackSpace,8))}},g=0,q=0,(loop=()=>{requestAnimationFrame(loop),(v=Date.now())>=q-1.5&&((x=g/w)*w|0==g&&(x+=1e-6),draw(x),q=Math.max(q+1e3/w,v),g++)})();
+      draw=b=>{for(c.width|=0,i=l=999;i--;)for(t=i/l+.02,e=t*(f=l/360)+b,r=S(e+C(e/3))**3*280+480,a=C(e/3)**3*150+270,h=i+360*b,k=30/t,y=C(h)*k,R=S(h)*k,$=1e3*t+2,d=.2*C(b/.7),r=r*C(d)+$*S(d),o=S(h)*C(3*e),x.fillStyle=`hsl(${50*o},80%,${(30*o+30)*(1-t**4)}%`,s=1-S(e/2)**14+.1,w=15/t*s,x.fillRect(y+r,R+a,w,w),v=w/2/s,x.fillStyle=`hsl(9,10%,${60*(1-t)}%`,track=2;track--;)x.fillRect(r+(track?-1:1)*v,a+.6*k,.8/t,8),(80*e|0)%10==0&&(x.fillStyle="#533",x.fillRect(r-v,a+.6*k,2*v,8))};
     </script>
     <code>
-      w=60,m=999,y=12,M=c.getContext("2d"),R=Math.sin,$=Math.cos,draw=g=>{for(c.width|=0,i=m;i--;){for(t=i/m+.02,l=R((e=t*(a=m/y/w)+g)+$(e/3))**3*280+480,r=$(e/3)**3*150+270,o=i+60*g*y,f=30/t,k=$(o)*f,S=R(o)*f,h=1e3*t+2,p=.2*$(g/.7),l=l*$(p)+h*R(p),n=R(o)*$(3*e),M.fillStyle=`hsl(${50*n},80%,${(30*n+30)*(1-t**4)}%`,s=1-R(e/2)**14+.1,d=12/t*s,M.fillRect(k+l,S+r,d,d),trackSpace=d/2/s,M.fillStyle=`hsl(9,10%,${60*(1-t)}%`,track=2;track--;)M.fillRect(l+(track?-1:1)*trackSpace,r+.6*f,.8/t,8);(80*e|0)%10==0&&(M.fillStyle="#533",M.fillRect(l-trackSpace,r+.6*f,2*trackSpace,8))}},g=0,q=0,(loop=()=>{requestAnimationFrame(loop),(v=Date.now())>=q-1.5&&((x=g/w)*w|0==g&&(x+=1e-6),draw(x),q=Math.max(q+1e3/w,v),g++)})();
+      for(c.width|=0,i=l=999;i--;)for(t=i/l+.02,e=t*(f=l/360)+b,r=S(e+C(e/3))**3*280+480,a=C(e/3)**3*150+270,h=i+360*b,k=30/t,y=C(h)*k,R=S(h)*k,$=1e3*t+2,d=.2*C(b/.7),r=r*C(d)+$*S(d),o=S(h)*C(3*e),x.fillStyle=`hsl(${50*o},80%,${(30*o+30)*(1-t**4)}%`,s=1-S(e/2)**14+.1,w=15/t*s,x.fillRect(y+r,R+a,w,w),v=w/2/s,x.fillStyle=`hsl(9,10%,${60*(1-t)}%`,track=2;track--;)x.fillRect(r+(track?-1:1)*v,a+.6*k,.8/t,8),(80*e|0)%10==0&&(x.fillStyle="#533",x.fillRect(r-v,a+.6*k,2*v,8))
     </code>
     <code>
-      706 bytes
+      465 bytes
     </code>
-    
+    <p>* uses <a href="https://www.dwitter.net/">Dwitter</a> code golf minimal host environment</p>
   </body>
 </html>

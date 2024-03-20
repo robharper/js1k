@@ -1,22 +1,15 @@
-var FPS = 60;
-var NUM_POINTS = 999;
-var SPEED = 12;
-
-var x = c.getContext("2d");
-var S = Math.sin;
-var C = Math.cos;
-
-var percent, period, progress, cx, cy, theta, r, xp, yp, distance, rot, color, seeThrough, size;
+var NUM_POINTS, percent, period, progress, cx, cy, theta, r, xp, yp, distance, rot, color, seeThrough, size, trackSpace;
 
 draw = t => {
   // Clear the canvas
   c.width |=0 ;
 
-  for(i=NUM_POINTS; i--;) {
+  for(i=(NUM_POINTS = 999); i--;) {
     // [0.01, 1.01] (ie zero to one avoiding div by zero)
     percent = i / NUM_POINTS + 0.02;
     // How many seconds does it take for a rect to move from the beginning to the end?
-    period = NUM_POINTS / SPEED / FPS;
+    // / 6 (SPEED) / 60 (FPS)
+    period = NUM_POINTS / 360;
     // How far along our tunnel (in distance from the beginning) are we?
     progress = percent*period + t;
 
@@ -32,7 +25,8 @@ draw = t => {
     // Since index N-1 is closer to the viewer, it gives the effect if the drawn rect
     // being moved closer to the camera. However, in reality, the rect of index N is
     // actually rotating around the spiral at a constant distance
-    theta = i + t*60*SPEED;
+    // FPS * SPEED = 60 * 6 = 360
+    theta = i + t*360;
     // Tunnel is 30 pixels wide at the further point, adjusted for perspective
     r = 30 / percent;
 
@@ -53,7 +47,7 @@ draw = t => {
     seeThrough = (1 - S(progress/2)**14 + 0.1);
 
     // Size rects nearer viwer larger
-    size = 12/percent * seeThrough;
+    size = 15/percent * seeThrough;
     x.fillRect(
       xp + cx,
       yp + cy,
@@ -80,21 +74,3 @@ draw = t => {
     }
   }
 }
-
-// Dwitter framework - maintain even 60 FPS
-var frame = 0;
-var frame_time, time;
-var next_frame_time = 0;
-(loop = () => {
-  requestAnimationFrame(loop);
-  frame_time = Date.now();
-  if (frame_time >= next_frame_time-1.5) {
-    time = frame / FPS;
-    if (time * FPS | 0 == frame) {
-      time += 0.000001;
-    }
-    draw(time);
-    next_frame_time = Math.max(next_frame_time + 1000/FPS, frame_time);
-    frame++;
-  }
-})();
