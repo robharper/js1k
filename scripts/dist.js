@@ -18,7 +18,7 @@ const ensureDir = (dir) => {
   }
 }
 
-const go = async () => {
+const go = async (app) => {
   // Ensure directories exists
   ensureDir(outDir);
   ensureDir(`${outDir}/img`);
@@ -26,7 +26,7 @@ const go = async () => {
   ensureDir(outDirJS);
 
   // Crush each js file
-  const jsfiles = await glob(`${inDirJS}/*.js`);
+  const jsfiles = await glob(`${inDirJS}/${app}.js`);
   jsfiles.forEach(input => {
     const output = input.replace(inDirJS, outDirJS);
 
@@ -48,7 +48,7 @@ const go = async () => {
   });
 
   // Copy html to root and inline js
-  const htmlfiles = await glob(`${inDirStatics}/*.html`);
+  const htmlfiles = await glob(`${inDirStatics}/${app}.html`);
   htmlfiles.forEach(input => {
     let html = fs.readFileSync(input, 'utf8');
 
@@ -96,4 +96,5 @@ const go = async () => {
   });
 };
 
-go();
+const app = process.argv.length > 2 ? process.argv[2] : '*';
+go(app);
