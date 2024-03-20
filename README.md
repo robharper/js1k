@@ -13,7 +13,9 @@ Having a little fun with JavaScript in spirit of the js1k (www.js1k.com) competi
 
 This may cheat a bit because it uses an image but the rest of the effect is entirely JS first principals (canvas). I've done very little optimization or shrinking. It would be much much faster to do this with WebGL shaders but it's more fun to pixel-twiddle like in the Turbo PASCAL days.
 
-**Size:** 1023 bytes
+**Size:** 920 bytes
+
+**Note:** This is slightly cheating since the size of the image is not included
 
 ## Shadebobs
 
@@ -38,11 +40,55 @@ http://www.robharper.ca/js1k/hypno.html
 
 **Size:** 1019 bytes
 
+## Worm Hole Train
+
+> Draws a "mine cart through a wormhole" type of effect using a neat approach to rendering movement
+
+http://www.robharper.ca/js1k/worm.html
+
+**Size:** 465 bytes
+
+**Note:** This demo uses the [Dwitter](https://www.dwitter.net/) tiny code framework (provides a few helper functions and handles calling your render function at 60 FPS)
+
+## Galaxy
+
+> A spinning 2-arm spiral galaxy
+
+http://www.robharper.ca/js1k/galaxy.html
+
+**Size:** 542 bytes
+
+## Chaos Game
+
+> Draws a series of iterations of the [chaos game](https://en.wikipedia.org/wiki/Chaos_game) within a heptagon with varying factor values over time
+
+http://www.robharper.ca/js1k/invariant.html
+
+**Size:** 387 bytes
+
+## Joy
+
+> A play on the Joy Division album art for Unknown Pleasures
+
+http://www.robharper.ca/js1k/plasma.html
+
+**Size:** 397 bytes
+
+
+## Plasma
+
+> Draws an old-school demo plasma effect - a true "Dweet": 140 bytes
+
+http://www.robharper.ca/js1k/plasma.html
+
+**Size:** 140 bytes
+
 # Not 1k
 Sometimes it's fun to just play with effects and not try to squeeze them down. So:
+
 ## Time Warp
 
-> Colorful warp effect inspired by http://roy.red/posts/slitscan/
+> Colorful warp effect inspired by http://roy.red/posts/slitscan/ using voronoi noise and GL shaders
 
 http://www.robharper.ca/js1k/tunnel.html
 
