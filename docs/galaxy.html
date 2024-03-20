@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Galaxy</title>
+    <style >
+      body {
+        background-color: #000;
+        color: #fff;
+      }
+      canvas {
+        width: 960px;
+        height: 540px;
+      }
+      code {
+        display: block;
+        margin-top: 2rem;
+        max-width: 640px;
+        word-break: break-all;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id=c width=960 height=540></canvas>
+
+    <script>
+      h=c.getContext("2d"),f=Math.sin,g=Math.cos,$="globalCompositeOperation",b="fillStyle",m=s=>{for(h[$]="source-over",h[b]="rgb(0,0,0,"+(.05*g(e=s/2)+.2),h.fillRect(0,0,2*(t=480),2*(l=270)),h[$]="lighter",i=999;i--;)o=i+i*g(i+e)/8,a=i*(i%2?1.567:7)+f(i**4)*g(i/600)*99/i+e,i>10?h.fillRect(g(a)*o/(r=2-(n=f(a)*o)/999)+t,.7*n/r+l,3,3,h[b]=`hsl(${50*g(i)} ${i/9}%${(999-i)/5}%`):h.fill(h.arc(h.beginPath(h[b]=`hsl(${2*i+30} 20%,50%,0.07`)||t+6*g(i+e),l+3*f(i),i*i/2,0,6.3))};(s=()=>{requestAnimationFrame(s),m(new Date/1e3)})();
+    </script>
+    <code>
+      h=c.getContext("2d"),f=Math.sin,g=Math.cos,$="globalCompositeOperation",b="fillStyle",m=s=>{for(h[$]="source-over",h[b]="rgb(0,0,0,"+(.05*g(e=s/2)+.2),h.fillRect(0,0,2*(t=480),2*(l=270)),h[$]="lighter",i=999;i--;)o=i+i*g(i+e)/8,a=i*(i%2?1.567:7)+f(i**4)*g(i/600)*99/i+e,i>10?h.fillRect(g(a)*o/(r=2-(n=f(a)*o)/999)+t,.7*n/r+l,3,3,h[b]=`hsl(${50*g(i)} ${i/9}%${(999-i)/5}%`):h.fill(h.arc(h.beginPath(h[b]=`hsl(${2*i+30} 20%,50%,0.07`)||t+6*g(i+e),l+3*f(i),i*i/2,0,6.3))};(s=()=>{requestAnimationFrame(s),m(new Date/1e3)})();
+    </code>
+    <code>
+      542 bytes
+    </code>
+
+  </body>
+</html>
