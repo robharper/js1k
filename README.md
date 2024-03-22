@@ -46,6 +46,8 @@ http://www.robharper.ca/js1k/hypno.html
 
 http://www.robharper.ca/js1k/worm.html
 
+<img width="939" alt="image" src="https://github.com/robharper/js1k/assets/900789/577734e2-1ae8-4e35-b4e0-34a420c888fb">
+
 **Size:** 465 bytes
 
 **Note:** This demo uses the [Dwitter](https://www.dwitter.net/) tiny code framework (provides a few helper functions and handles calling your render function at 60 FPS)
@@ -56,6 +58,8 @@ http://www.robharper.ca/js1k/worm.html
 
 http://www.robharper.ca/js1k/galaxy.html
 
+<img width="987" alt="image" src="https://github.com/robharper/js1k/assets/900789/c2625525-8d93-4635-aa3e-5092c50dec0c">
+
 **Size:** 542 bytes
 
 ## Chaos Game
@@ -63,6 +67,8 @@ http://www.robharper.ca/js1k/galaxy.html
 > Draws a series of iterations of the [chaos game](https://en.wikipedia.org/wiki/Chaos_game) within a heptagon with varying factor values over time
 
 http://www.robharper.ca/js1k/invariant.html
+
+<img width="629" alt="image" src="https://github.com/robharper/js1k/assets/900789/bcd54344-21e1-4f69-b240-c77619514047">
 
 **Size:** 387 bytes
 
@@ -72,7 +78,19 @@ http://www.robharper.ca/js1k/invariant.html
 
 http://www.robharper.ca/js1k/plasma.html
 
+<img width="486" alt="image" src="https://github.com/robharper/js1k/assets/900789/570fc9e5-9c1f-4227-8b9b-02e615a067c1">
+
 **Size:** 397 bytes
+
+## Interference
+
+> Black and white geometric patterns through varying the size of rectangle drawn at relatively static locations
+
+http://www.robharper.ca/js1k/interference.html
+
+<img width="954" alt="image" src="https://github.com/robharper/js1k/assets/900789/98419467-fc5e-4c70-8c31-d02887f79989">
+
+**Size:** 170 bytes
 
 
 ## Plasma
@@ -80,6 +98,8 @@ http://www.robharper.ca/js1k/plasma.html
 > Draws an old-school demo plasma effect - a true "Dweet": 140 bytes
 
 http://www.robharper.ca/js1k/plasma.html
+
+<img width="940" alt="image" src="https://github.com/robharper/js1k/assets/900789/8cafabd0-7931-4a6d-a815-4c96b6268214">
 
 **Size:** 140 bytes
 
