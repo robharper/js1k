@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Interference</title>
+    <style >
+      body {
+        background-color: #fff;
+      }
+      canvas {
+        width: 960px;
+        height: 540px;
+      }
+      code {
+        display: block;
+        margin-top: 2rem;
+        max-width: 640px;
+        word-break: break-all;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id=c width=960 height=540></canvas>
+    
+    <script>
+      draw=d=>{for(c.width|=0,W=240,H=135,f=4e4;f--;x.fillRect(8*r+1/(e-30*(C(d)+S(1.7*d)-3*d)%H-H)*H,8*e,t=9-o,t))for(i=(r=f%W)+12*d,l=(e=f/W|0)-9*d,o=6;o-- >1&&1&(i>>o^l>>o);i+=d)l+=d};
+    </script>
+    <code>
+      for(c.width|=0,W=240,H=135,f=4e4;f--;x.fillRect(8*r+1/(e-30*(C(d)+S(1.7*d)-3*d)%H-H)*H,8*e,t=9-o,t))for(i=(r=f%W)+12*d,l=(e=f/W|0)-9*d,o=6;o-- >1&&1&(i>>o^l>>o);i+=d)l+=d
+    </code>
+    <code>
+      170 bytes
+    </code>
+    <p>* uses <a href="https://www.dwitter.net/">Dwitter</a> code golf minimal host environment</p>
+    <script src="lib/dwitter.js"></script>
+  </body>
+</html>
