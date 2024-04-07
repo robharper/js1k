@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>BitScape</title>
+    <style >
+      body {
+        background-color: #fff;
+      }
+      canvas {
+        width: 960px;
+        height: 540px;
+      }
+      code {
+        display: block;
+        margin-top: 2rem;
+        max-width: 640px;
+        word-break: break-all;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id=c width=960 height=540></canvas>
+    
+    <script>
+      draw=s=>{for(c.width|=0,f=120,l=70,e=0,r=13+5*C(s),a=3+2*S(1.7*s),t=3+3*s,i=9e3;i--;)for(o=i%f,b=i/f|0,g=((k=0|r)-r+1)*(y=1/(d=2*o/f)),j=((v=0|a)-a+1)*(R=1/(h=2*b/l)),m=(w=0|t)-t+1;m<18;)if(n=0,g<m&&g<j?(g+=y,k+=1):j<m?(j+=R,v+=1):(m+=1,w+=1,n=1),C(p=k*w)>.5&&v>10-8*S(p)||12===v){x.fillStyle=12===v?"#1a1":n?"#000":"#666",x.fillRect(16*o,16*b,q=18-m,q);break}};
+    </script>
+    <code>
+      for(c.width|=0,f=120,l=70,e=0,r=13+5*C(s),a=3+2*S(1.7*s),t=3+3*s,i=9e3;i--;)for(o=i%f,b=i/f|0,g=((k=0|r)-r+1)*(y=1/(d=2*o/f)),j=((v=0|a)-a+1)*(R=1/(h=2*b/l)),m=(w=0|t)-t+1;m<18;)if(n=0,g<m&&g<j?(g+=y,k+=1):j<m?(j+=R,v+=1):(m+=1,w+=1,n=1),C(p=k*w)>.5&&v>10-8*S(p)||12===v){x.fillStyle=12===v?"#1a1":n?"#000":"#666",x.fillRect(16*o,16*b,q=18-m,q);break}
+    </code>
+    <code>
+      351 bytes
+    </code>
+    <p>* uses <a href="https://www.dwitter.net/">Dwitter</a> code golf minimal host environment</p>
+    <script src="lib/dwitter.js"></script>
+  </body>
+</html>
