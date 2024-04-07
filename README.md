@@ -82,6 +82,16 @@ http://www.robharper.ca/js1k/plasma.html
 
 **Size:** 397 bytes
 
+## BitScape
+
+> Basic 3d ray casting, flying over a city scape, pixelated
+
+http://www.robharper.ca/js1k/bitscape.html
+
+<img width="956" alt="image" src="https://github.com/robharper/js1k/assets/900789/fc0c438f-d5d4-4b21-a990-7e3d4711c14f">
+
+**Size**: 351 bytes
+
 ## Interference
 
 > Black and white geometric patterns through varying the size of rectangle drawn at relatively static locations
