@@ -82,8 +82,8 @@ img.onload = function(){
         }
 
         // Rotate u,v about image center
-        cosOfRot = cos(rot);
-        sinOfRot = sin(rot);
+        var cosOfRot = cos(rot);
+        var sinOfRot = sin(rot);
         u -= widthH;
         v -= heightH;
         temp = u*cosOfRot - v*sinOfRot;
